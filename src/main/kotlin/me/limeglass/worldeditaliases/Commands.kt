@@ -90,8 +90,8 @@ class Commands(
     @CommandDescription("Reload the aliases.")
     @Permission("worldeditaliases.command.reload")
     fun reload(context: CommandContext<Source>) {
-        instance.loadConfigurations()
+        Bukkit.getScheduler().runTaskAsynchronously(instance, Runnable { instance.loadConfigurations() })
         context.sender().source().sendTranslated("command.aliases-reloaded")
     }
-    
+
 }
