@@ -1,0 +1,72 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+buildscript {
+	apply from: 'dependencies.gradle'
+}
+
+plugins {
+	id 'org.jetbrains.kotlin.jvm' version '2.0.0'
+	id 'java'
+}
+
+def supportedJava = 21
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(supportedJava))
+}
+
+kotlin {
+	jvmToolchain {
+		languageVersion.set(JavaLanguageVersion.of(supportedJava))
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.compilerArgs += ['-source', '' + supportedJava, '-target', '' + supportedJava]
+}
+
+compileTestJava.options.encoding = 'UTF-8'
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+	mavenCentral()
+
+	// Spigot
+	maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+
+	// Bungeecord
+	maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+
+	// Paper and Adventure API
+	maven { url 'https://repo.papermc.io/repository/maven-public/' }
+
+	// WorldEdit
+	maven { url 'https://maven.enginehub.org/repo/' }
+
+}
+
+dependencies {
+	implementation "org.spigotmc:spigot-api:${project.spigot_version}"
+	implementation ("com.sk89q.worldedit:worldedit-bukkit:${project.worldedit_version}") {
+		exclude module: 'bstats-bukkit'
+	}
+
+	implementation "org.incendo:cloud-kotlin-coroutines-annotations:${project.cloud_kotlin_coroutines_annotations_version}"
+	implementation "net.kyori:adventure-platform-bukkit:${project.adventure_platform_bukkit_version}"
+	implementation "net.kyori:adventure-text-minimessage:${project.adventure_minimessage_version}"
+	implementation "org.incendo:cloud-annotations:${project.cloud_annotations_version}"
+	implementation "org.jetbrains.kotlin:kotlin-stdlib:${project.kotlin_version}"
+	implementation "org.incendo:cloud-paper:${project.cloud_paper_version}"
+}
+
+processResources {
+	filter ReplaceTokens, tokens: [
+		'cloud_kotlin_coroutines_annotations_version' : project.property('cloud_kotlin_coroutines_annotations_version'),
+		'adventure_platform_bukkit_version' : project.property('adventure_platform_bukkit_version'),
+		'adventure_minimessage_version' : project.property('adventure_minimessage_version'),
+		'cloud_annotations_version' : project.property('cloud_annotations_version'),
+		'cloud_paper_version' : project.property('cloud_paper_version'),
+		'kotlin_version' : project.property('kotlin_version'),
+		'version' : project.property('plugin_version'),
+	]
+}

@@ -1,0 +1,13 @@
+name: worldedit-aliases
+authors: [LimeGlass]
+version: @version@
+api-version: 1.17
+depend: [WorldEdit]
+main: me.limeglass.worldeditaliases.WorldEditAliases
+libraries:
+  - "org.incendo:cloud-kotlin-coroutines-annotations:@cloud_kotlin_coroutines_annotations_version@"
+  - "net.kyori:adventure-platform-bukkit:@adventure_platform_bukkit_version@"
+  - "net.kyori:adventure-text-minimessage:@adventure_minimessage_version@"
+  - "org.incendo:cloud-annotations:@cloud_annotations_version@"
+  - "org.jetbrains.kotlin:kotlin-stdlib:@kotlin_version@"
+  - "org.incendo:cloud-paper:@cloud_paper_version@"

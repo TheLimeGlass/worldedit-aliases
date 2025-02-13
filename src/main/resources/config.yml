@@ -1,0 +1,14 @@
+messages:
+  command:
+    aliases-exists: "<red>The aliases <alias> is already in use."
+    aliases-not-exists: "<red>The aliases <alias> does not exist."
+    aliases-reloaded: "<green>Aliases configurations reloaded."
+    aliases-set: "<green>Aliases <alias> set to <block>"
+    aliases-removed: "<green>Aliases <alias> removed."
+    aliases-list-entry: "<gray><alias> -> <block>"
+    aliases-help:
+      - "<click:suggest_command:/worldeditaliases add ><hover:show_text:'click to suggest command'><yellow>/worldeditaliases add <block> <alias> <gold>- <yellow>Add an alias for a block</click>"
+      - "  <gray>Example: <gray>/worldeditaliases add minecraft:diamond_block d"
+      - "<click:suggest_command:/worldeditaliases remove ><hover:show_text:'click to suggest command'><yellow>/worldeditaliases remove <alias> <gold>- <yellow>Remove an alias</click>"
+      - "  <gray>Example: <gray>/worldeditaliases remove d"
+      - "<click:run_command:/worldeditaliases list><hover:show_text:'click to run command'><yellow>/worldeditaliases list <gold>- <yellow>List all aliases</click>"
