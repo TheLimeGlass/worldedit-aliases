@@ -9,5 +9,5 @@ ext {
     cloud_kotlin_coroutines_annotations_version = '2.0.0'
     cloud_paper_version = '2.0.0-beta.10'
     cloud_annotations_version = '2.0.0'
-    kotlin_version = '2.0.0'
+    kotlin_version = '2.1.10'
 }
