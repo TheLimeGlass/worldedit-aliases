@@ -1,6 +1,6 @@
 # worldedit-aliases
 
-Allows builders to add aliases for worldedit patterns.
+Allows builders to add aliases for worldedit patterns Spigot server side.
 
 Reducing the time it takes to type out long block names, even with tab complete.
 
