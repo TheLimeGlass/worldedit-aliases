@@ -2,7 +2,7 @@
 
 ext {
     plugin_version = '1.0'
-    spigot_version = '1.21.5-R0.1-SNAPSHOT'
+    spigot_version = '1.21.6-R0.1-SNAPSHOT'
     worldedit_version = '7.4.0-SNAPSHOT'
     adventure_minimessage_version = '4.19.0'
     adventure_platform_bukkit_version = '4.3.4'
