@@ -5,7 +5,7 @@ ext {
     spigot_version = '1.21.7-R0.1-SNAPSHOT'
     worldedit_version = '7.4.0-SNAPSHOT'
     adventure_minimessage_version = '4.23.0'
-    adventure_platform_bukkit_version = '4.4.0'
+    adventure_platform_bukkit_version = '4.4.1'
     cloud_kotlin_coroutines_annotations_version = '2.0.0'
     cloud_paper_version = '2.0.0-SNAPSHOT'
     cloud_annotations_version = '2.0.0'
