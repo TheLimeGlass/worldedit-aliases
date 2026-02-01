@@ -22,3 +22,17 @@ In this example d = diamond_block and e = emerald_block.
 - `worldeditaliases.command.remove` - Allows the player to remove aliases.
 - `worldeditaliases.command.list` - Allows the player to list aliases.
 - `worldeditaliases.command.add` - Allows the player to add aliases.
+
+## Development
+
+### Building
+```bash
+./gradlew build
+```
+
+### Releasing
+To create a new release:
+1. Update the version in `dependencies.gradle`
+2. Commit and push the changes
+3. Create and push a version tag (e.g., `git tag v1.1 && git push origin v1.1`)
+4. The GitHub Actions workflow will automatically build and create a release
