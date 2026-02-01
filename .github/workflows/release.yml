@@ -18,8 +18,6 @@ jobs:
       
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
-        with:
-          gradle-version: "current"
       
       - name: validate gradle wrapper
         uses: gradle/wrapper-validation-action@v3
@@ -32,7 +30,7 @@ jobs:
           check-latest: true
       
       - name: build
-        run: gradle build
+        run: ./gradlew build
       
       - name: Extract version from tag
         id: extract_version
