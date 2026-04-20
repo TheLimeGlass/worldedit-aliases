@@ -9,7 +9,7 @@ plugins {
 	id 'java'
 }
 
-def supportedJava = 25
+def supportedJava = 21
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(supportedJava))
