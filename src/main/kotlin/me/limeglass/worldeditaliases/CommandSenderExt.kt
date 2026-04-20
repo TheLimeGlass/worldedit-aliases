@@ -18,7 +18,7 @@ fun CommandSender.sendTranslated(node: String, vararg parameters: Pair<String, C
     val translatedParams = parameters.map { (key, value) -> Placeholder.component(key.lowercase(), value) }
     CommandSenderExt.config.getString("messages.$node")?.let {
         CommandSenderExt.adventure.sender(this).sendMessage(
-            CommandSenderExt.miniMessage.deserialize(it, TagResolver.resolver(translatedParams))
+            CommandSenderExt.miniMessage.deserialize(it, TagResolver.resolver(*translatedParams.toTypedArray()))
         )
     }
 }
@@ -27,7 +27,7 @@ fun CommandSender.sendTranslatedList(node: String, vararg parameters: Pair<Strin
     val translatedParams = parameters.map { (key, value) -> Placeholder.component(key.lowercase(), value) }
     CommandSenderExt.config.getList("messages.$node")?.map { it as String }?.forEach {
         CommandSenderExt.adventure.sender(this).sendMessage(
-            CommandSenderExt.miniMessage.deserialize(it, TagResolver.resolver(translatedParams))
+            CommandSenderExt.miniMessage.deserialize(it, TagResolver.resolver(*translatedParams.toTypedArray()))
         )
     }
 }

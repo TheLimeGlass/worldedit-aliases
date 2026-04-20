@@ -5,6 +5,7 @@ import com.sk89q.worldedit.extension.input.InputParseException
 import com.sk89q.worldedit.extension.input.ParserContext
 import com.sk89q.worldedit.internal.registry.InputParser
 import com.sk89q.worldedit.world.block.BaseBlock
+import io.papermc.paper.command.brigadier.CommandSourceStack
 import net.kyori.adventure.platform.bukkit.BukkitAudiences
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
@@ -14,8 +15,6 @@ import org.incendo.cloud.annotations.AnnotationParser
 import org.incendo.cloud.execution.ExecutionCoordinator
 import org.incendo.cloud.kotlin.coroutines.annotations.installCoroutineSupport
 import org.incendo.cloud.paper.PaperCommandManager
-import org.incendo.cloud.paper.util.sender.PaperSimpleSenderMapper
-import org.incendo.cloud.paper.util.sender.Source
 import java.io.File
 
 class WorldEditAliases : JavaPlugin() {
@@ -28,11 +27,11 @@ class WorldEditAliases : JavaPlugin() {
         CommandSenderExt.miniMessage = MiniMessage.miniMessage()
         CommandSenderExt.adventure = BukkitAudiences.create(this)
         CommandSenderExt.config = config
-        val commandManager = PaperCommandManager.builder(PaperSimpleSenderMapper.simpleSenderMapper())
+        val commandManager: PaperCommandManager<CommandSourceStack?> = PaperCommandManager.builder()
             .executionCoordinator(ExecutionCoordinator.asyncCoordinator())
             .buildOnEnable(this)
 
-        AnnotationParser(commandManager, Source::class.java).apply {
+        AnnotationParser(commandManager, CommandSourceStack::class.java).apply {
             installCoroutineSupport()
             parse(Commands(aliases, this@WorldEditAliases))
         }
