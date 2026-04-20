@@ -36,7 +36,7 @@ class WorldEditAliases : JavaPlugin() {
             parse(Commands(aliases, this@WorldEditAliases))
         }
 
-        Bukkit.getScheduler().runTaskAsynchronously(this, Runnable { loadConfigurations() })
+        loadConfigurations()
 
         WorldEdit.getInstance().blockFactory.register(object : InputParser<BaseBlock>(WorldEdit.getInstance()) {
             @Throws(InputParseException::class)
