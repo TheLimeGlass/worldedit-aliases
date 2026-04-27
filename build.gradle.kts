@@ -3,7 +3,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply(from = "dependencies.gradle.kts")
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "2.3.20"
+    id("org.jetbrains.kotlin.jvm") version "2.3.21"
     java
 }
 
