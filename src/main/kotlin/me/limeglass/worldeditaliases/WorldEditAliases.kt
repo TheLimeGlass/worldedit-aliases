@@ -67,7 +67,9 @@ class WorldEditAliases : JavaPlugin() {
     }
 
     override fun onDisable() {
-        saveAliasesToConfig()
+        if (this::aliasesConfig.isInitialized) {
+            saveAliasesToConfig()
+        }
     }
 
     fun saveAliasesToConfig() {
