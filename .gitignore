@@ -67,3 +67,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+/run/
+/runs/

@@ -5,7 +5,6 @@ import com.sk89q.worldedit.extension.input.InputParseException
 import com.sk89q.worldedit.extension.input.ParserContext
 import com.sk89q.worldedit.internal.registry.InputParser
 import com.sk89q.worldedit.world.block.BaseBlock
-import io.papermc.paper.command.brigadier.CommandSourceStack
 import net.kyori.adventure.platform.bukkit.BukkitAudiences
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
@@ -15,23 +14,35 @@ import org.incendo.cloud.annotations.AnnotationParser
 import org.incendo.cloud.execution.ExecutionCoordinator
 import org.incendo.cloud.kotlin.coroutines.annotations.installCoroutineSupport
 import org.incendo.cloud.paper.PaperCommandManager
+import org.incendo.cloud.paper.util.sender.PaperSimpleSenderMapper
+import org.incendo.cloud.paper.util.sender.Source
 import java.io.File
 
 class WorldEditAliases : JavaPlugin() {
 
-    private val aliases = mutableMapOf<String, String>()
+    companion object {
+        @JvmStatic
+        var TESTING: Boolean = System.getProperty("worldeditaliases.testing")?.toBoolean() ?: false
+    }
+
+    internal val aliases = mutableMapOf<String, String>()
     private lateinit var aliasesConfig: YamlConfiguration
     private lateinit var aliasesFile: File
+    private var integrationTest: IntegrationTest? = null
 
     override fun onEnable() {
+        if (TESTING) {
+            integrationTest = IntegrationTest(this)
+        }
         CommandSenderExt.miniMessage = MiniMessage.miniMessage()
         CommandSenderExt.adventure = BukkitAudiences.create(this)
         CommandSenderExt.config = config
-        val commandManager: PaperCommandManager<CommandSourceStack?> = PaperCommandManager.builder()
+        val commandManager: PaperCommandManager<Source> = PaperCommandManager
+            .builder(PaperSimpleSenderMapper.simpleSenderMapper())
             .executionCoordinator(ExecutionCoordinator.asyncCoordinator())
             .buildOnEnable(this)
 
-        AnnotationParser(commandManager, CommandSourceStack::class.java).apply {
+        AnnotationParser(commandManager, Source::class.java).apply {
             installCoroutineSupport()
             parse(Commands(aliases, this@WorldEditAliases))
         }
@@ -44,6 +55,10 @@ class WorldEditAliases : JavaPlugin() {
                 return aliases[input]?.let { WorldEdit.getInstance().blockFactory.parseFromInput(it, context) }
             }
         })
+
+        if (TESTING) {
+            integrationTest?.start()
+        }
     }
 
     fun loadConfigurations() {
@@ -70,11 +85,11 @@ class WorldEditAliases : JavaPlugin() {
         if (this::aliasesConfig.isInitialized) {
             saveAliasesToConfig()
         }
+        integrationTest?.onPluginDisabled()
     }
 
     fun saveAliasesToConfig() {
         aliasesConfig.set("aliases", aliases.map { mapOf("alias" to it.key, "block" to it.value) })
         aliasesConfig.save(aliasesFile)
     }
-
 }
