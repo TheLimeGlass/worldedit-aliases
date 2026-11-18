@@ -1,15 +1,16 @@
 import org.gradle.kotlin.dsl.extra
-import org.gradle.kotlin.dsl.invoke
 
 // Done to allow dependabot scanning
 
-val plugin_version: String by extra("1.5")
-val minecraft_version: String by extra("26.3")
-val paper_version: String by extra("$minecraft_version.build.+")
-val worldedit_version: String by extra("7.4.6")
-val adventure_minimessage_version: String by extra("4.26.1")
-val adventure_platform_bukkit_version: String by extra("4.4.1")
-val cloud_kotlin_coroutines_annotations_version: String by extra("2.1.0")
-val cloud_paper_version: String by extra("2.0.1")
-val cloud_annotations_version: String by extra("2.1.0")
-val kotlin_version: String by extra("2.4.10")
+val minecraftVersion = "26.3"
+
+extra.set("plugin_version", "1.5")
+extra.set("minecraft_version", minecraftVersion)
+extra.set("paper_version", "$minecraftVersion.build.+")
+extra.set("worldedit_version", "7.4.6")
+extra.set("adventure_minimessage_version", "4.26.1")
+extra.set("adventure_platform_bukkit_version", "4.4.1")
+extra.set("cloud_kotlin_coroutines_annotations_version", "2.1.0")
+extra.set("cloud_paper_version", "2.0.1")
+extra.set("cloud_annotations_version", "2.1.0")
+extra.set("kotlin_version", "2.4.10")
