@@ -7,7 +7,7 @@ apply(from = "dependencies.gradle.kts")
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "2.4.21"
-    id("xyz.jpenilla.run-paper") version "3.0.2"
+    id("xyz.jpenilla.run-paper") version "3.1.0"
     java
 }
 
